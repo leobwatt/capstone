@@ -1,5 +1,6 @@
-import cv2
 from collections import deque
+
+import cv2
 import numpy as np
 
 BUFFER_SIZE = 64
@@ -20,7 +21,9 @@ while True:
     mask = cv2.erode(mask, np.zeros(1), iterations=2)
     mask = cv2.dilate(mask, np.zeros(1), iterations=2)
 
-    contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+    contours = cv2.findContours(
+        mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )[0]
     center = (0, 0)
 
     if len(contours) > 0:
@@ -29,7 +32,7 @@ while True:
         m = cv2.moments(c)
         center = (int(m["m10"] / m["m00"]), int(m["m01"] / m["m00"]))
 
-        if radius > 10 :
+        if radius > 10:
             cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
@@ -41,7 +44,7 @@ while True:
 
         thickness = int(np.sqrt(BUFFER_SIZE / float(i + 1) * 2.5))
         cv2.line(frame, points[i - 1], points[i], (0, 0, 255), thickness)
-    
+
     cv2.imshow("Frame", frame)
 
     key = cv2.waitKey(1) & 0xFF
