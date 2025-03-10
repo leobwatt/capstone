@@ -20,7 +20,7 @@ while True:
     mask = cv2.erode(mask, np.zeros(1), iterations=2)
     mask = cv2.dilate(mask, np.zeros(1), iterations=2)
 
-    contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
     center = (0, 0)
 
     if len(contours) > 0:
