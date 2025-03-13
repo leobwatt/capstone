@@ -22,6 +22,9 @@ requires-dist = [
     { name = "opencv-python", specifier = ">=4.11.0.86" },
 ]
 
+[package.metadata.requires-dev]
+dev = []
+
 [[package]]
 name = "cvzone"
 version = "1.6.1"
